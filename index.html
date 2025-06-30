@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Broadcastor Test</title>
+  </head>
+  <body>
+    <h1>Hello, Broadcastor!</h1>
+    <button id="btn-release">发布</button>
+    <button id="btn-off">取消订阅</button>
+    <button id="btn-once">只执行一次</button>
+    <button id="btn-clear">清空所有订阅</button>
+    <script src="/dist/broadcastor.js"></script>
+    <script type="module">
+      const emitter = new mitt();
+
+      document.getElementById("btn-release").addEventListener("click", () => {
+        console.log("发布");
+        emitter.emit("test", { a: 1, b: 2 });
+        emitter.emit("test", { c: 1, d: 2 });
+      });
+
+      document.getElementById("btn-off").addEventListener("click", () => {
+        emitter.off("test");
+        console.log(emitter);
+      });
+
+      document.getElementById("btn-once").addEventListener("click", () => {
+        emitter.once("test", (...args) => {
+          console.log("test接受到消息了", args);
+        });
+      });
+
+      document.getElementById("btn-clear").addEventListener("click", () => {
+        emitter.clear();
+        console.log(emitter);
+      });
+
+      emitter.on("test", (args) => {
+        console.log("test接受到消息了", args);
+      });
+      emitter.on("test", (args) => {
+        console.log("test接受到消息了1", args);
+      });
+      console.log(emitter);
+    </script>
+  </body>
+</html>
