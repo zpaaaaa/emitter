@@ -1,0 +1,21 @@
+
+{
+  "name": "emitter",
+  "version": "0.0.1",
+  "author": "青晚舟",
+  "description": "订阅发布者插件",
+  "keywords": ["eventbus"],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/xxx/shang-utils"
+  },
+  "license": "ISC",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "dependencies": {
+  },
+  "devDependencies": {
+  }
+}
