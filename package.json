@@ -1,18 +1,21 @@
 {
   "name": "mitt-pubsub",
-  "version": "0.0.3",
+  "version": "0.0.4",
   "author": "青晚舟",
   "description": "发布订阅者插件",
   "type": "module",
   "keywords": [
-    "eventbus","mitt","pubsub"
+    "eventbus",
+    "mitt",
+    "pubsub"
   ],
   "repository": {
     "type": "git",
     "url": "https://github.com/zpaaaaa/emitter#"
   },
   "license": "ISC",
-  "main": "index.js",
+  "main": "dist/index.js",
+  "module": "dist/index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "build": "rollup -c",
