@@ -1,11 +1,11 @@
 {
-  "name": "broadcastor",
-  "version": "0.0.2",
+  "name": "mitt-pubsub",
+  "version": "0.0.3",
   "author": "青晚舟",
-  "description": "订阅发布者插件",
+  "description": "发布订阅者插件",
   "type": "module",
   "keywords": [
-    "eventbus"
+    "eventbus","mitt","pubsub"
   ],
   "repository": {
     "type": "git",
