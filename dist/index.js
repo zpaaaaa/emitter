@@ -14,25 +14,42 @@
         : this.events.set(type, [listener]);
     }
     emit(type, ...args) {
+      if (typeof type !== "string" && !Array.isArray(type)) {
+        throw new TypeError("emit: type must be a string or an array");
+      }
       if (typeof type === "string" && type === "*") {
-        const allHandlers = [...this.events.values()];
-        console.log(allHandlers);
+        const allHandlers = this.events.values();
         allHandlers.forEach((handler) => {
-          handler.map((fun) => fun(...args));
+          handler.forEach((fun) => {
+            this.#invokeHandler(fun,args);
+          });
         });
         return;
       }
       if (Array.isArray(type)) {
         type.forEach((item) => {
-          this.events.get(item)?.map((fun) => fun(...args));
+          this.events.get(item)?.map((fun) => {
+            this.#invokeHandler(fun,args);
+          });
         });
         return;
       }
       let handlers = this.events.get(type);
       if (handlers) {
-        this.events.get(type)?.map((fun) => fun(...args));
+        this.events.get(type)?.map((fun) => {
+          this.#invokeHandler(fun,args);
+        });
       }
     }
+    #invokeHandler = (fun,args) => {
+      if (fun.constructor.name === "AsyncFunction") {
+        Promise.resolve().then(() => {
+          fun(...args);
+        });
+      } else {
+        fun(...args);
+      }
+    };
     off(type, listener) {
       const index = this.events.get(type).indexOf(listener);
       if (index > -1) {

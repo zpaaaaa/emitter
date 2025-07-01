@@ -15,7 +15,6 @@
     <script src="/dist/index.js"></script>
     <script type="module">
       const emitter = new mitt();
-
       document.getElementById("btn-release").addEventListener("click", () => {
         console.log("发布");
         emitter.emit("test", { a: 1, b: 2 });
@@ -26,7 +25,7 @@
         .getElementById("btn-all-release")
         .addEventListener("click", () => {
           console.log("给所有注册的事件发送订阅消息");
-          emitter.emit("*", { e: 1, f: 2 });
+          emitter.emit("*", { url: "http://127.0.0.1:5500"});
         });
 
       document
@@ -37,7 +36,7 @@
         });
 
       document.getElementById("btn-once").addEventListener("click", () => {
-         emitter.emit("test111", "一次就好");
+        emitter.emit("test111", "一次就好");
       });
 
       document.getElementById("btn-clear").addEventListener("click", () => {
@@ -59,8 +58,10 @@
         emitter.off("test", two);
         console.log(emitter);
       });
-      emitter.on("test1", (args) => {
+      emitter.on("test1", async (args) => {
         console.log("test接受到消息了3", args);
+        const result = await fetch(args.url);
+        console.log("result", result);
       });
       emitter.on("test2", (args) => {
         console.log("test接受到消息了4", args);
