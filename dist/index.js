@@ -8,13 +8,11 @@
     constructor() {
       this.events = new Map();
     }
-    // 触发事件
     on(type, listener) {
       this.events.has(type)
         ? this.events.get(type).push(listener)
         : this.events.set(type, [listener]);
     }
-    // 注册事件   这可以触发当前订阅的所有事件 支持传递数组进行批量订阅
     emit(type, ...args) {
       if (typeof type === "string" && type === "*") {
         const allHandlers = [...this.events.values()];
@@ -44,8 +42,12 @@
         this.events.delete(type);
       }
     }
-    once() {
-      throw new Error("Method not implemented.");
+    once(type, listener) {
+      const wrapped = (...args) => {
+        listener(...args);
+        this.off(type, wrapped);
+      };
+      this.on(type, wrapped);
     }
     clear() {
       this.events.clear();

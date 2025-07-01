@@ -37,9 +37,7 @@
         });
 
       document.getElementById("btn-once").addEventListener("click", () => {
-        emitter.once("test", (...args) => {
-          console.log("test接受到消息了", args);
-        });
+         emitter.emit("test111", "一次就好");
       });
 
       document.getElementById("btn-clear").addEventListener("click", () => {
@@ -58,7 +56,7 @@
       emitter.on("test", one);
       emitter.on("test", two);
       document.getElementById("btn-off").addEventListener("click", () => {
-        emitter.off("test",two);
+        emitter.off("test", two);
         console.log(emitter);
       });
       emitter.on("test1", (args) => {
@@ -66,6 +64,9 @@
       });
       emitter.on("test2", (args) => {
         console.log("test接受到消息了4", args);
+      });
+      emitter.once("test111", (...args) => {
+        console.log("test接受到消息了111", args);
       });
       console.log(emitter);
     </script>
