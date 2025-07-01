@@ -7,6 +7,8 @@
   <body>
     <h1>Hello, Mitt!</h1>
     <button id="btn-release">发布</button>
+    <button id="btn-all-release">给所有注册的事件发送订阅消息</button>
+    <button id="btn-multiple-release">一次性给多个订阅者发布消息</button>
     <button id="btn-off">取消订阅</button>
     <button id="btn-once">只执行一次</button>
     <button id="btn-clear">清空所有订阅</button>
@@ -17,13 +19,22 @@
       document.getElementById("btn-release").addEventListener("click", () => {
         console.log("发布");
         emitter.emit("test", { a: 1, b: 2 });
-        emitter.emit("test", { c: 1, d: 2 });
+        // emitter.emit("test", { c: 1, d: 2 });
       });
 
-      document.getElementById("btn-off").addEventListener("click", () => {
-        emitter.off("test");
-        console.log(emitter);
-      });
+      document
+        .getElementById("btn-all-release")
+        .addEventListener("click", () => {
+          console.log("给所有注册的事件发送订阅消息");
+          emitter.emit("*", { e: 1, f: 2 });
+        });
+
+      document
+        .getElementById("btn-multiple-release")
+        .addEventListener("click", () => {
+          console.log("一次性给多个订阅者发布消息");
+          emitter.emit(["test1", "test2"], { g: 1, h: 2 });
+        });
 
       document.getElementById("btn-once").addEventListener("click", () => {
         emitter.once("test", (...args) => {
@@ -35,12 +46,26 @@
         emitter.clear();
         console.log(emitter);
       });
-
-      emitter.on("test", (args) => {
-        console.log("test接受到消息了", args);
-      });
-      emitter.on("test", (args) => {
+      const one = (args) => {
         console.log("test接受到消息了1", args);
+      };
+      const two = (args) => {
+        console.log("test接受到消息了2", args);
+      };
+      const three = (args) => {
+        console.log("test接受到消息了3", args);
+      };
+      emitter.on("test", one);
+      emitter.on("test", two);
+      document.getElementById("btn-off").addEventListener("click", () => {
+        emitter.off("test",two);
+        console.log(emitter);
+      });
+      emitter.on("test1", (args) => {
+        console.log("test接受到消息了3", args);
+      });
+      emitter.on("test2", (args) => {
+        console.log("test接受到消息了4", args);
       });
       console.log(emitter);
     </script>
