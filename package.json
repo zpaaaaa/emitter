@@ -1,6 +1,6 @@
 {
   "name": "mitt-pubsub",
-  "version": "0.0.4",
+  "version": "0.0.5",
   "author": "青晚舟",
   "description": "发布订阅者插件",
   "type": "module",
