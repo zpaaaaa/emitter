@@ -1,9 +1,10 @@
 {
   "name": "mitt-pubsub",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "author": "青晚舟",
   "description": "一个3KB的发布者/订阅者插件",
   "type": "module",
+  "types": "src/index.d.ts",
   "keywords": [
     "eventbus",
     "mitt",
