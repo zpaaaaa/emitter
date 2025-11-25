@@ -49,7 +49,7 @@ UMD 构建版本也通过 [unpkg](https://unpkg.com) 提供：
 ```js
 import mitt from 'mitt'
 
-const emitter = mitt()
+const emitter = new mitt();
 
 // 监听某个事件
 emitter.on('foo', e => console.log('foo', e) )
@@ -85,6 +85,8 @@ emitter.off('foo', onFoo)  // 移除监听器
 -   [all](#all)
 -   [on](#on)
     -   [参数](#parameters)
+-   [once](#once)
+    -   [参数](#parameters)
 -   [off](#off)
     -   [参数](#parameters-1)
 -   [emit](#emit)
@@ -103,6 +105,11 @@ Mitt：一个小型（约 2.5kb 字节）的函数式事件发射器 / 发布订
 ### on
 
 为指定类型的事件注册一个处理函数。
+
+
+### once
+
+为指定类型的事件注册一个只执行一次的处理函数。
 
 #### 参数
 
@@ -130,27 +137,3 @@ Mitt：一个小型（约 2.5kb 字节）的函数式事件发射器 / 发布订
 
 -   `type` **([string](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String) \| [symbol](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Symbol))** 要触发的事件类型
 -   `evt` **任意类型？** 可以传入任意值（推荐对象），并传递给每个处理函数
-
-## 贡献代码
-
-首先，感谢你花时间来贡献！
-现在，请花点时间确保你的贡献对所有人来说都有意义。
-
-### 报告问题
-
-发现了问题？想新增功能？首先看看你的想法或问题是否已经被 [报告过](../../issues)。
-如果没有，请 [新建一个清晰且描述详尽的问题](../../issues/new)。
-
-### 提交 Pull Request
-
-Pull Request 是最受欢迎的贡献方式，请确保它们范围明确，避免提交不相关的改动。
-
--   Fork 它！
--   克隆你的 fork：`git clone https://github.com/<your-username>/mitt`
--   进入克隆后的目录：`cd mitt`
--   创建新分支用于开发新功能：`git checkout -b my-new-feature`
--   安装必要的开发工具：`npm install`
--   开始进行你的修改。
--   提交你的更改：`git commit -am 'Add some feature'`
--   推送到远程分支：`git push origin my-new-feature`
--   提交一个 Pull Request，并详细说明你的更改。
